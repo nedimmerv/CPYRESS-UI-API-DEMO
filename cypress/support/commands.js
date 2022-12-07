@@ -63,3 +63,18 @@ Cypress.Commands.add("loginApp", (email, password) => {
   cy.get("#Password").type(password);
   cy.get("button[class='button-1 login-button']").click();
 });
+
+// Token Creation
+Cypress.Commands.add("create_token", () => {
+  cy.request({
+    method: "POST",
+    url: "https://hx-glog-keyclk.uksouth.cloudapp.azure.com:8443/auth/realms/qa/protocol/openid-connect/token",
+    form: true,
+    body: {
+      grant_type: "password",
+      client_id: "webfront",
+      username: "qa.admin@hitachivantara.com",
+      password: "test123",
+    },
+  });
+});
